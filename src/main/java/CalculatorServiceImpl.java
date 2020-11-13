@@ -38,12 +38,14 @@ public class CalculatorServiceImpl extends CalculatorGrpc.CalculatorImplBase {
         calculatedBuilder.setCalculationTime((new Date().getTime() - calculationStart.getTime()) / 1000.0);
         calculatedBuilder.setCalculationDate(getCurrentTimestamp());
 
-        System.out.println(MessageFormat.format("Calculating...\n" +
-                "op1: {0}\n" +
-                "op2: {1}\n" +
-                "operation: {2}\n" +
-                "result: {3}",
-                op1, op2, request.getOperation(), calculatedBuilder.getResult()));
+        System.out.println(MessageFormat.format(
+                "Calculating...\n" +
+                        "op1: {0}\n" +
+                        "op2: {1}\n" +
+                        "operation: {2}\n" +
+                        "result: {3}\n" +
+                        "status: {4}",
+                op1, op2, request.getOperation(), calculatedBuilder.getResult(), calculatedBuilder.getCalculationStatus()));
 
         responseObserver.onNext(calculatedBuilder.build());
         responseObserver.onCompleted();
